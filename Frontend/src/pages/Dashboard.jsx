@@ -81,7 +81,7 @@ const Dashboard = () => {
     // Fetch submission data from API
     const fetchSubmissions = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/requests/getRequests');
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/requests/getRequests`);
             if (!response.data.success) {
                 toast.error(response.data.message);
                 return;
@@ -104,7 +104,7 @@ const Dashboard = () => {
     // Fetch hospital data from API
     const fetchHospitals = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/hospitals/getHospitals');
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/hospitals/getHospitals`);
             if (!response.data.success) {
                 toast.error(response.data.message);
                 return;
@@ -120,7 +120,7 @@ const Dashboard = () => {
     // Fetch patient data from API
     const fetchPatients = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/patients/getPatients');
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/patients/getPatients`);
             if (!response.data.success) {
                 toast.error(response.data.message);
                 return;
@@ -140,7 +140,7 @@ const Dashboard = () => {
     // Prepare data for pie chart visualization
     const pieChartData = async () => {
         try {
-            const diseases = await axios.get('http://localhost:3000/api/patientDiseases/getDiseases');
+            const diseases = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/patientDiseases/getDiseases`);
             if (!diseases.data.success) {
                 toast.error(diseases.data.message);
                 return;
@@ -170,7 +170,7 @@ const Dashboard = () => {
     // Fetch all diseases from API
     const fetchAllDiseases = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/diseases/getDiseases');
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/diseases/getDiseases`);
             if (!response.data.success) {
                 toast.error(response.data.message);
                 return;
@@ -209,7 +209,7 @@ const Dashboard = () => {
         const query = 'Give me the top 5 trending diseases in India in only in JSON format and object should include no.of cases in numbers and disease name . Provide ONLY a valid JSON response without markdown or extra text.'
         try {
             setLoading(true)
-            const response = await axios.post('http://localhost:3000/api/callGemini', { query: query });
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/callGemini`, { query: query });
             if (!response.data.success) {
                 toast.error(response.data.message);
                 return;

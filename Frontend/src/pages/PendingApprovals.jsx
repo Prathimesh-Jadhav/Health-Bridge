@@ -71,7 +71,7 @@ const PendingApprovals = () => {
   // Function to fetch requests from the API
   const fetchRequests = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/requests/getRequests');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/requests/getRequests`);
       if (!response.data.success) {
         toast.error(response.data.message);
         return;
@@ -87,7 +87,7 @@ const PendingApprovals = () => {
   // Function to approve a request
   const handleRequestApprove = async (id) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/requests/updateRequest', { id, action: 'Approved' });
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/requests/updateRequest`, { id, action: 'Approved' });
       if (response.data.success) {
         toast.success(response.data.message);
         fetchRequests(); // Refresh the requests list
@@ -102,7 +102,7 @@ const PendingApprovals = () => {
   // Function to reject a request
   const handleRequestReject = async (id) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/requests/updateRequest', { id, action: 'Rejected' });
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/requests/updateRequest`, { id, action: 'Rejected' });
       if (response.data.success) {
         toast.success(response.data.message);
         fetchRequests(); // Refresh the requests list

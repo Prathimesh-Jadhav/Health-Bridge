@@ -39,7 +39,7 @@ const Requests = () => {
 
   const fetchRequests = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/requests/getRequests');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/requests/getRequests`);
       if (!response.data.success) {
         toast.error(response.data.message);
         return;

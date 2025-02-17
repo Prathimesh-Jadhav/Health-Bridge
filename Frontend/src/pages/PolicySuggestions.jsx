@@ -32,7 +32,7 @@ const PolicySuggestions = () => {
   // Function to fetch diseases from the API
   const fetchDiseases = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/patientDiseases/getDiseases');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/patientDiseases/getDiseases`);
       setDiseases(response.data.data);
     } catch (error) {
       console.error('Error fetching diseases:', error);
@@ -45,25 +45,32 @@ const PolicySuggestions = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        'http://localhost:3000/api/callGemini',
+        `${import.meta.env.VITE_BACKEND_URL}/api/callGemini`,
         { query: query, data: diseases },
-        { headers: { 'Content-Type': 'application/json' }}
+        { headers: { 'Content-Type': 'application/json' } }
       );
-
+  
       if (!response.data.success) {
         toast.error(response.data.message);
         setLoading(false);
         return;
       }
-
-      const responseText = response.data.data;
-      const points = responseText.split('\n').filter(line => line.trim() !== ''); // Split response into points
-
-      // Update messages with the query and response
+  
+      console.log('Response Data:', response.data); // Debugging log
+      let responseText = response.data.data;
+  
+      // Ensure responseText is a string before splitting
+      if (typeof responseText !== 'string') {
+        responseText = JSON.stringify(responseText); // Convert object to string if necessary
+      }
+  
+      const points = responseText.split('\n').filter(line => line.trim() !== '');
+  
       setMessages(prevMessages => [
-        ...prevMessages.slice(0, -1), // Remove the last input message
+        ...prevMessages.slice(0, -1),
         { content: query, response: points }
       ]);
+  
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -71,6 +78,7 @@ const PolicySuggestions = () => {
       setLoading(false);
     }
   };
+  
 
   // Function to handle form submission
   const handleSubmit = (e) => {

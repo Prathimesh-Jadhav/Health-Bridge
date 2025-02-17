@@ -60,7 +60,7 @@ const AddHospital = ({ openHospitalForm, setOpenHospitalForm, getHospitals }) =>
         }
         // Send data to the backend
         try {
-            const response = await axios.post('http://localhost:3000/api/hospitals/addHospital', hospitalData, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/hospitals/addHospital`, hospitalData, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${sessionStorage.getItem('token')}` // Add authorization token

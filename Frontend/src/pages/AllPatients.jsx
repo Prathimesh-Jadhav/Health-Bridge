@@ -33,7 +33,7 @@ const AllPatients = () => {
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/patients/getPatients');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/patients/getPatients`);
       if(!response.data.success) {
         toast.error(response.data.message);
         return;

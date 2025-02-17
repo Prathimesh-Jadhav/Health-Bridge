@@ -53,7 +53,7 @@ const Hospitals = () => {
   // Function to fetch hospitals from the API
   const getHospitals = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/hospitals/getHospitals');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/hospitals/getHospitals`);
       if (response.data.success) {
         setHospitals(response.data.data); // Update the hospitals state
         setFilteredHospitals(response.data.data); // Initialize filtered hospitals

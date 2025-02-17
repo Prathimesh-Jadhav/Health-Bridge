@@ -27,7 +27,7 @@ const Login = () => {
     console.log(loginData); // Log the form data for debugging
     try {
       // Send a POST request to the login endpoint with the form data
-      const response = await axios.post('http://localhost:3000/api/users/login', loginData, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, loginData, {
         headers: {
           'Content-Type': 'application/json', // Set content type to JSON
           authorization: `Bearer ${sessionStorage.getItem('token')}` // Include authorization token if available

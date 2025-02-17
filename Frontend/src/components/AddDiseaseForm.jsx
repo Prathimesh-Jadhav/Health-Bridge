@@ -31,7 +31,7 @@ const AddDiseaseForm = ({ openDiseaseForm, setOpenDiseaseForm }) => {
 
         try {
             // Make an axios POST request to send the form data
-            const response = await axios.post('http://localhost:3000/api/diseases/addDisease', formData, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/diseases/addDisease`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data', // Indicating that the request contains form data
                     Authorization: `Bearer ${sessionStorage.getItem('token')}` // Add JWT token to the headers for authentication

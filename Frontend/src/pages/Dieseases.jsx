@@ -61,7 +61,7 @@ const Diseases = () => {
   // Function to fetch diseases from the API
   const fetchDiseases = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/patientDiseases/getDiseases');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/patientDiseases/getDiseases`);
       setDiseases(response.data.data); // Update the diseases state
       setFilteredDiseases(response.data.data); // Initialize filtered diseases
     } catch (error) {

@@ -69,7 +69,7 @@ const PatientData = () => {
   // Function to fetch diseases from the API
   const fetchDiseases = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/diseases/getDiseases');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/diseases/getDiseases`);
       setDiseases(response.data.data); // Update the diseases state
     } catch (error) {
       console.error('Error fetching diseases:', error);
@@ -101,7 +101,7 @@ const PatientData = () => {
     }
     try {
       // Submit patient data to the API
-      const response = await axios.post('http://localhost:3000/api/patients/addPatient', patientData, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/patients/addPatient`, patientData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${sessionStorage.getItem('token')}`, // Include authorization token
