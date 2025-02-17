@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 3000;
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Database connected"); // Log successful database connection
-    module.exports = app; // Export the Express app to be used in server.js
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); // Export the Express app to be used in server.js
   })
   .catch((err) => {
     console.log(err); // Log any errors during database connection
@@ -52,3 +52,6 @@ app.use('/api/patientDiseases', patientDiseasesRouter); // Routes for patient-di
 
 // Route to call the Gemini API
 app.post('/api/callGemini', callGemini); // Endpoint for interacting with the Gemini API
+app.get('/', (req, res) => {
+  res.send('Welcome to the HealthNet API!'); // Default route
+});
