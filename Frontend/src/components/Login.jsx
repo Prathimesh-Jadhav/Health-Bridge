@@ -24,7 +24,9 @@ const Login = () => {
 
   // Function to handle form submission
   const submitLogin = async () => {
-    console.log(loginData); // Log the form data for debugging
+    console.log('Login Data:', loginData); // Log the form data for debugging
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    console.log("Backend URL:", backendUrl);
     try {
       // Send a POST request to the login endpoint with the form data
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, loginData, {
@@ -34,7 +36,7 @@ const Login = () => {
         }
       });
 
-      console.log(response.data.success); // Log the success status for debugging
+      console.log('response.data.success:', response.data.success); // Log the success status for debugging
       if (response.data.success) {
         toast.success(response.data.message); // Show success toast notification
         // Store user data in session storage
