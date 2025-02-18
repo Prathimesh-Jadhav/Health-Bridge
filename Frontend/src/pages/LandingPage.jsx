@@ -14,13 +14,12 @@ const LandingPage = () => {
       <Navbar />
 
       {/* Main content section */}
-      <div className='px-[40px] max-md:px-[20px] flex items-center justify-between mt-[120px] w-full xl:mb-[60px] flex-wrap max-2xl:flex-col-reverse max-xl:gap-6'>
-        {/* Left section: Text and login button */}
-        <div className='flex flex-col gap-2 text-4xl font-bold leading-tight max-lg:text-heading1 max-2xl:text-center'>
+      <div className='px-[40px] max-md:px-[20px] flex items-center justify-between mt-[150px] w-full xl:mb-[60px] flex-row max-2xl:flex-col-reverse max-xl:gap-6'>
+        {/* Left Section */}
+        <div className='flex flex-col gap-2 text-5xl font-bold leading-tight w-[50%] max-lg:text-heading1 max-2xl:w-full max-2xl:text-center'>
           <p>Seamless Reports.</p>
           <p>Smarter Policies.</p>
           <p>Healthier Communities.</p>
-          {/* Login button */}
           <div className='flex gap-4 mt-2 hover:cursor-pointer max-2xl:justify-center' onClick={() => navigate('/login')}>
             <div className='button border-[1px] text-2xl px-[80px] border-gray-500 bg-primary text-white hover:bg-primaryhover text-md rounded-full'>
               Login
@@ -28,17 +27,19 @@ const LandingPage = () => {
           </div>
         </div>
 
-        {/* Right section: Lottie animation */}
-        <div>
+        {/* Right Section - Lottie Animation */}
+        <div className='w-[50%] flex justify-center'>
           <Lottie
             options={{
-              animationData: animation, // Animation data
-              loop: true, // Enable looping
-              style: { width: '40%', height: '40%' }, // Animation styles
+              animationData: animation,
+              loop: true,
             }}
+            height={350}
+            width={350}
           />
         </div>
       </div>
+
 
       {/* Footer section */}
       <div className='text-center text-sm font-medium mb-2'>
