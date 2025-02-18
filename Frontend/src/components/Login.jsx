@@ -27,9 +27,10 @@ const Login = () => {
     console.log('Login Data:', loginData); // Log the form data for debugging
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     console.log("Backend URL:", backendUrl);
+    const apiurl = `${backendUrl}/api/users/login`;
     try {
       // Send a POST request to the login endpoint with the form data
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, loginData, {
+      const response = await axios.post(apiurl, loginData, {
         headers: {
           'Content-Type': 'application/json', // Set content type to JSON
           authorization: `Bearer ${sessionStorage.getItem('token')}` // Include authorization token if available
