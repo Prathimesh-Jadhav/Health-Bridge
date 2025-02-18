@@ -16,7 +16,7 @@ const LandingPage = () => {
       {/* Main content section */}
       <div className='px-[40px] max-md:px-[20px] flex items-center justify-between mt-[120px] w-full xl:mb-[60px] flex-wrap max-2xl:flex-col-reverse max-xl:gap-6'>
         {/* Left section: Text and login button */}
-        <div className='flex flex-col gap-2 text-6xl font-bold leading-tight max-lg:text-heading1 max-2xl:text-center'>
+        <div className='flex flex-col gap-2 text-4xl font-bold leading-tight max-lg:text-heading1 max-2xl:text-center'>
           <p>Seamless Reports.</p>
           <p>Smarter Policies.</p>
           <p>Healthier Communities.</p>
@@ -34,6 +34,7 @@ const LandingPage = () => {
             options={{
               animationData: animation, // Animation data
               loop: true, // Enable looping
+              style: { width: '40%', height: '40%' }, // Animation styles
             }}
           />
         </div>
