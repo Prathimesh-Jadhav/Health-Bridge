@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import avatar from '../assets/avatar.svg' // Import avatar image
 import downArrow from '../assets/downArrow.svg' // Import down arrow image
 import { AppContext } from '../context/GlobalContext'; // Import global context for shared state
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link, useNavigate } from 'react-router-dom'; // Import Link for navigation
 import { sidebarOptions } from '../data'; // Import sidebar options data
 
 const LayoutNav = () => {
@@ -14,6 +14,8 @@ const LayoutNav = () => {
 
   // State to store menu options based on the user role
   const [menuOptions, setMenuOptions] = React.useState(false);
+
+  const Navigate = useNavigate(); // Navigate to a new page
 
   // useEffect to set menu options based on the user role when the component mounts or user changes
   useEffect(() => {
@@ -40,7 +42,8 @@ const LayoutNav = () => {
 
   // Function to handle user logout
   const handleLogout = () => {
-    sessionStorage.clear(); // Clear session storage
+    sessionStorage.clear();
+    Navigate('/') // Clear session storage
     window.location.reload(); // Reload the page to reset the application state
   };
 
