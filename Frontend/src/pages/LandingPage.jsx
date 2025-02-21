@@ -34,8 +34,8 @@ const LandingPage = () => {
               animationData: animation,
               loop: true,
             }}
-            height={350}
-            width={350}
+            height={400}
+            width={400}
           />
         </div>
       </div>
