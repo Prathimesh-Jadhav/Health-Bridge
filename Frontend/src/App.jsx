@@ -17,7 +17,7 @@ import Dieseases from './pages/Dieseases';
 import Details from './pages/Details';
 import { PrimeReactProvider } from 'primereact/api';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import mainPageLoader from './assets/mainPageLoader.json';
 import Lottie from 'react-lottie';
 import animationData from './assets/mainPageLoader.json';
@@ -28,7 +28,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isAnimationLoaded, setIsAnimationLoaded] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
 
     const handleLoadingComplete = () => {
       setLoading(false);
