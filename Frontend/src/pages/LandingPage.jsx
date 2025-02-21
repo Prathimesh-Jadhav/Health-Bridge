@@ -14,21 +14,21 @@ const LandingPage = () => {
       <Navbar />
 
       {/* Main content section */}
-      <div className='px-[40px] max-md:px-[20px] flex items-center justify-between mt-[150px] w-full xl:mb-[60px] flex-row max-2xl:flex-col-reverse max-xl:gap-6'>
+      <div className='px-[40px] max-md:px-[20px] flex items-center justify-between md:mt-[150px] w-full xl:mb-[60px] flex-row max-2xl:flex-col-reverse max-xl:gap-6'>
         {/* Left Section */}
         <div className='flex flex-col gap-2 text-5xl font-bold leading-tight w-[50%] max-lg:text-heading1 max-2xl:w-full max-2xl:text-center'>
           <p>Seamless Reports.</p>
           <p>Smarter Policies.</p>
           <p>Healthier Communities.</p>
           <div className='flex gap-4 mt-2 hover:cursor-pointer max-2xl:justify-center' onClick={() => navigate('/login')}>
-            <div className='button border-[1px] text-2xl px-[80px] border-gray-500 bg-primary text-white hover:bg-primaryhover text-md rounded-full'>
+            <div className='button border-[1px] text-2xl px-[80px] border-gray-500 bg-primary text-white hover:bg-primaryhover text-md rounded-full max-md:hidden '>
               Login
             </div>
           </div>
         </div>
 
         {/* Right Section - Lottie Animation */}
-        <div className='w-[50%] flex justify-center'>
+        <div className='w-[50%] flex justify-center max-md:w-full'>
           <Lottie
             options={{
               animationData: animation,

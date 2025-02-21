@@ -24,25 +24,40 @@ import animationData from './assets/mainPageLoader.json';
 
 
 function App() {
-
-  const [loading, setLoading] = useState(true);
+ 
+  const [loading,setLoading] = useState(true);
   const [isAnimationLoaded, setIsAnimationLoaded] = useState(false);
 
-  // useLayoutEffect(() => {
+  //set the loader until the page is fully loaded
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
 
-  //   const handleLoadingComplete = () => {
-  //     setLoading(false);
-  //   };
+    return () => {
+      setLoading(true);
+    }
+  },[]);
 
-  //   window.addEventListener('load', handleLoadingComplete);
-
-
-  //   return () => {
-  //     // clearTimeout(timer);
-  //     window.removeEventListener('load', handleLoadingComplete);
-  //   };
-
-  // }, []);
+  if(loading){
+    return (
+      <div className='flex flex-col justify-center items-center h-screen'>
+        <Lottie
+          options={{
+            loop: true,
+            autoplay: true,
+            animationData: animationData,
+            rendererSettings: {
+              preserveAspectRatio: "xMidYMid slice"
+            }
+          }}
+          height={200}
+          width={200}
+        />
+        <div className='text-2xl animate-pulse'>Loading... Please Wait</div>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -67,10 +82,8 @@ function App() {
                     <Route path='details' element={<Details />} />
                   </Route>
                 </Routes>
-
               </Router>
             </PrimeReactProvider>
-          }
         </GlobalContext>
       </Theme>
     </>
@@ -78,7 +91,3 @@ function App() {
 }
 
 export default App
-
-    // const timer = setTimeout(() => {
-    //   setLoading(false);
-    // }, 5000);
