@@ -21,7 +21,8 @@ const AddHospital = ({ openHospitalForm, setOpenHospitalForm, getHospitals }) =>
     });
 
     // State to store the list of states fetched from the API
-    const [states, setStates] = React.useState([]);
+    const [states, setStates] = React.useState(['Maharashtra','Rajasthan']);
+    const [loading, setLoading] = React.useState(false);
 
 
     // Function to handle input changes and update the state
@@ -31,6 +32,7 @@ const AddHospital = ({ openHospitalForm, setOpenHospitalForm, getHospitals }) =>
             [e.target.name]: e.target.value
         });
     };
+
 
     // Function to handle dialog close and reset form data
     const handleDialog = () => {
@@ -46,16 +48,19 @@ const AddHospital = ({ openHospitalForm, setOpenHospitalForm, getHospitals }) =>
             email: '',
             password: ''
         });
+        setLoading(false);
         setOpenHospitalForm(false); // Close the form dialog
     }
 
     // Function to handle form submission
     const submitHospital = async (e) => {
         e.preventDefault();
+        setLoading(true);
         console.log(hospitalData);
         // Check if all fields are filled
         if (hospitalData.hospitalName === '' || hospitalData.doctorName === '' || hospitalData.doctorID === '' || hospitalData.state === '' || hospitalData.district === '' || hospitalData.town === '' || hospitalData.type === '' || hospitalData.email === '' || hospitalData.password === '') {
             alert('Please fill all the fields'); // Alert if any field is empty
+            setLoading(false);  
             return;
         }
         // Send data to the backend
@@ -88,6 +93,7 @@ const AddHospital = ({ openHospitalForm, setOpenHospitalForm, getHospitals }) =>
             email: '',
             password: ''
         });
+        setLoading(false);
         getHospitals(); // Refresh the list of hospitals
         setOpenHospitalForm(false); // Close the form dialog
     }
@@ -124,13 +130,16 @@ const AddHospital = ({ openHospitalForm, setOpenHospitalForm, getHospitals }) =>
                         <label htmlFor="address">Address</label>
                         <div className='flex items-center gap-4'>
                             <select name="state" id="state" className='border-[1px] border-gray-300 rounded-md hover:cursor-pointer py-1' onChange={handleInputChange} value={hospitalData.state}>
-                                {
-                                    states.map((state, index) => {
-                                        return (
-                                            <option key={index} value={state.name}>{state.name}</option>
-                                        )
-                                    })
-                                }
+                                <option value="" disabled>State</option>
+                                
+                                    {
+                                        states.map((state, index) => {
+                                            return (
+                                                <option key={index} value={state}>{state}</option>
+                                            )
+                                        })
+                                    }
+                                
                             </select>
                             <select name="district" id="district" className='border-[1px] border-gray-300 rounded-md hover:cursor-pointer py-1' onChange={handleInputChange} value={hospitalData.district}>
                                 <option value="" disabled>District</option>
@@ -172,7 +181,7 @@ const AddHospital = ({ openHospitalForm, setOpenHospitalForm, getHospitals }) =>
                     {/* Form Action Buttons */}
                     <div className='flex justify-end items-center gap-4 mt-6'>
                         <button type="button" className='bg-gray-200 rounded-lg py-2 px-4 hover:bg-gray-300' onClick={handleDialog}>Cancel</button>
-                        <button type="submit" className='bg-green-500 rounded-lg py-2 px-4 text-white hover:bg-green-600' onClick={submitHospital}>Submit</button>
+                        <button type="submit" className='bg-green-500 rounded-lg py-2 px-4 text-white hover:bg-green-600' onClick={submitHospital}>{loading?'Submitting...':'Submit'}</button>
                     </div>
                 </form>
             </div>

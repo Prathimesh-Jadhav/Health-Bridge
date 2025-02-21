@@ -11,6 +11,8 @@ const Login = () => {
     password: ''
   });
 
+  const [loading,setLoading] = React.useState(false);
+
   // useNavigate hook for programmatic navigation
   const Navigate = useNavigate();
 
@@ -24,6 +26,7 @@ const Login = () => {
 
   // Function to handle form submission
   const submitLogin = async () => {
+    setLoading(true);
     console.log('Login Data:', loginData); 
     const backendUrl = import.meta.env.VITE_BACKEND_URL?.trim(); 
     if (!backendUrl) {
@@ -59,6 +62,9 @@ const Login = () => {
     } catch (err) {
       console.error("Login error:", err);
       toast.error(err.response?.data?.message || "Something went wrong. Please try again.");
+    }
+    finally{
+      setLoading(false)
     }
   };
   
@@ -104,7 +110,7 @@ const Login = () => {
             className='mt-4 hover:cursor-pointer button border-[1px] border-gray-500 bg-primary text-white hover:bg-primaryhover text-center'
             onClick={submitLogin} // Handle form submission on click
           >
-            Login
+            {loading ? 'Loading...' : 'Login'}
           </div>
         </form>
       </div>
