@@ -12,6 +12,7 @@ const addPatient = async (req, res) => {
     const patient = await patientModel.create({ patientName, age, disease:diseaseName , address:region, sex:sex.toLowerCase(), aadharNumber:aadhar,doctorID:user.doctorID});
     if (!patient) return res.status(400).json({ message: "Error adding patient", success: false });
     const diseaseExists = await dieseasesModel.findOne({diseaseID:diseaseID,addedBy:user.doctorID});
+    console.log('diseaseExists',diseaseExists);
     if(diseaseExists){
         diseaseExists.cases += 1;
         await diseaseExists.save();
@@ -19,6 +20,7 @@ const addPatient = async (req, res) => {
     else{
       try{
         const hospital = await hospitalModel.findOne({doctorID:user.doctorID});
+        await dieseasesModel.collection.dropIndex("diseaseID_1");
         await dieseasesModel.create({diseaseID:diseaseID,diseaseName:diseaseName,cases:1,region:region,addedBy:user.doctorID,hospitalID:hospital.hospitalID});
       }
       catch(err){
