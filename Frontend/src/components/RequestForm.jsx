@@ -3,6 +3,8 @@ import axios from 'axios'; // Import axios for making HTTP requests
 import { toast } from 'react-toastify'; // Import toast for displaying notifications
 
 const RequestForm = ({ openPatientForm, setOpenPatientForm, fetchRequests }) => {
+
+  const [loading, setLoading] = React.useState(false); // State to manage loading state of the form
   // State to manage the form data for the request
   const [data, setData] = React.useState({
     request: '',
@@ -16,6 +18,7 @@ const RequestForm = ({ openPatientForm, setOpenPatientForm, fetchRequests }) => 
       request: '',
       quantity: ''
     }); // Reset form data
+    setLoading(false);
   };
 
   // Function to handle input changes in the form
@@ -29,11 +32,13 @@ const RequestForm = ({ openPatientForm, setOpenPatientForm, fetchRequests }) => 
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
+    setLoading(true); // Set loading state to true
     console.log(data); // Log form data for debugging
 
     // Validate if all fields are filled
     if (data.request === '' || data.quantity === '') {
       toast.error('Please fill all the fields'); // Show error toast if any field is empty
+      setLoading(false); // Set loading state to false
       return;
     }
 
@@ -63,6 +68,8 @@ const RequestForm = ({ openPatientForm, setOpenPatientForm, fetchRequests }) => 
     }
 
     fetchRequests(); // Refresh the list of requests
+
+    setLoading(false);
   };
 
   return (
@@ -119,7 +126,7 @@ const RequestForm = ({ openPatientForm, setOpenPatientForm, fetchRequests }) => 
               className='bg-green-500 rounded-lg py-2 px-4 text-white hover:bg-green-600'
               onClick={handleSubmit} // Handle form submission
             >
-              Add
+              {loading ? 'Adding...' : 'Add'} 
             </button>
           </div>
         </form>

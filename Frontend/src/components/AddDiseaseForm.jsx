@@ -10,6 +10,8 @@ const AddDiseaseForm = ({ openDiseaseForm, setOpenDiseaseForm }) => {
         diseaseName: '',
     })
 
+    const [loading, setLoading] = React.useState(false) // State to manage loading state of the form
+
     // State to hold the uploaded file (image)
     const [file, setFile] = React.useState('')
 
@@ -24,6 +26,7 @@ const AddDiseaseForm = ({ openDiseaseForm, setOpenDiseaseForm }) => {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault() // Prevent default form submission
+        setLoading(true) // Set loading state to true
         const formData = new FormData()
         formData.append('diseaseID', diseaseData.diseaseID) // Append disease ID to form data
         formData.append('diseaseName', diseaseData.diseaseName) // Append disease name to form data
@@ -61,6 +64,7 @@ const AddDiseaseForm = ({ openDiseaseForm, setOpenDiseaseForm }) => {
             diseaseName: ''
         })
         setOpenDiseaseForm(false)
+        setLoading(false)
     }
 
     return (
@@ -114,7 +118,7 @@ const AddDiseaseForm = ({ openDiseaseForm, setOpenDiseaseForm }) => {
                             className='px-4 rounded-lg bg-secondary text-white hover:bg-secondaryhover py-2' 
                             onClick={handleSubmit} // Submit the form data
                         >
-                            Add
+                            {loading ? 'Adding...' : 'Add'}
                         </button>
                     </div>
                 </form>

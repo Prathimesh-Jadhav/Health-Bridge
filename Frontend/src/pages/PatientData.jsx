@@ -11,6 +11,8 @@ const PatientData = () => {
   // State for storing the list of diseases
   const [diseases, setDiseases] = React.useState([]);
 
+  const [loading, setLoading] = React.useState(false); // State to manage loading state of the form
+
   // State for managing patient data form inputs
   const [patientData, setPatientData] = React.useState({
     patientName: '',
@@ -91,8 +93,10 @@ const PatientData = () => {
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading state to true
     // Validate required fields
     if (!patientData.patientName || !patientData.age || !patientData.aadhar || !patientData.disease || !patientData.sex) {
+      setLoading(false); // Set loading state to false
       return toast.error('Please fill all the fields');
     }
     // Validate Aadhar number length
@@ -116,6 +120,7 @@ const PatientData = () => {
     } catch (err) {
       console.log(err);
     }
+    setLoading(false); // Set loading state to false
   };
 
   // Function to reset the form
@@ -133,6 +138,7 @@ const PatientData = () => {
       sex: '',
       aadhar: '',
     });
+    setLoading(false);
   };
 
   return (
@@ -262,7 +268,7 @@ const PatientData = () => {
               type='submit'
               onClick={handleSubmit}
             >
-              Submit
+              {loading ? 'Submitting...' : 'Submit'}
             </button>
           </div>
         </form>
