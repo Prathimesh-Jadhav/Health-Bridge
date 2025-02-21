@@ -21,7 +21,7 @@ const LandingPage = () => {
           <p>Smarter Policies.</p>
           <p>Healthier Communities.</p>
           <div className='flex gap-4 mt-2 hover:cursor-pointer max-2xl:justify-center' onClick={() => navigate('/login')}>
-            <div className='button border-[1px] text-2xl px-[80px] border-gray-500 bg-primary text-white hover:bg-primaryhover text-md rounded-full max-md:hidden '>
+            <div className=' border-[1px] text-2xl px-[40px] border-gray-500 bg-primary text-white hover:bg-primaryhover text-md rounded-full max-md:hidden py-2 mt-2'>
               Login
             </div>
           </div>
