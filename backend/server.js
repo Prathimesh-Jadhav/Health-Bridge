@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGODB_URI)
   });
 
 // Middleware to enable CORS
-app.use(cors({ origin: "https://health-bridge-frontend.vercel.app", credentials: true }));
+app.use(cors());
 
 // Middleware to parse JSON requests
 app.use(express.json());
