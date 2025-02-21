@@ -28,40 +28,27 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isAnimationLoaded, setIsAnimationLoaded] = useState(false);
 
-  useLayoutEffect(() => {
+  // useLayoutEffect(() => {
 
-    const handleLoadingComplete = () => {
-      setLoading(false);
-    };
+  //   const handleLoadingComplete = () => {
+  //     setLoading(false);
+  //   };
 
-    window.addEventListener('load', handleLoadingComplete);
+  //   window.addEventListener('load', handleLoadingComplete);
 
 
-    return () => {
-      // clearTimeout(timer);
-      window.removeEventListener('load', handleLoadingComplete);
-    };
+  //   return () => {
+  //     // clearTimeout(timer);
+  //     window.removeEventListener('load', handleLoadingComplete);
+  //   };
 
-  }, []);
+  // }, []);
 
   return (
     <>
       <Theme >
         <GlobalContext>
-          {
-            loading ? (
-              <div className="flex items-center justify-center h-screen w-full bg-gray-100">
-                <div className='flex flex-col gap-4'>
-                  <Lottie
-                    options={{ animationData, loop: true }}
-                    style={{ width: "25%", height: "25%" }}
-                  />
-                  <div className="text-xl text-center text-gray-700 animate-pulse">
-                  Loading... Please wait!
-                </div>
-                </div>
-              </div>
-            ) : <PrimeReactProvider >
+        <PrimeReactProvider >
               <div className='flex justify-center'><ToastContainer /></div>
               <Router>
                 <Routes>
