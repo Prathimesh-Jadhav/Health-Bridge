@@ -257,12 +257,12 @@ const PatientData = () => {
           </div>
           {/* Form buttons (Reset and Submit) */}
           <div className='mt-2 flex justify-end gap-4 mr-4'>
-            <button
-              className='button border-[1px] hover:bg-gray-300 border-gray-300 bg-gray-100 text-gray-700'
+            <span
+              className='button border-[1px] hover:bg-gray-300 border-gray-300 bg-gray-100 text-gray-700 hover:cursor-pointer'
               onClick={handleReset}
             >
               Reset
-            </button>
+            </span>
             <button
               className='button border-[1px] border-gray-500 bg-secondary text-white hover:bg-secondaryhover'
               type='submit'

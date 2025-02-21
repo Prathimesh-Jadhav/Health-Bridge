@@ -443,7 +443,7 @@ const Dashboard = () => {
                                                             <td className="px-2">{request.hospitalID}</td>
                                                             <td className='py-3 px-2'>{request.request}</td>
                                                             <td className='px-2'>{request.quantity}</td>
-                                                            <td className={`px-4 rounded-lg`}><span className={`px-4 py-2 rounded-lg ${request.status.toLowerCase() === 'pending' ? 'bg-rose-200 text-rose-400' : 'bg-green-100 text-green-400'}`}>{request.status}</span></td>
+                                                            <td className={`px-4 rounded-lg`}><span className={`px-4 py-2 rounded-lg ${request.status === 'Pending' || request.status === 'Rejected' ? 'bg-rose-200 text-rose-400' : 'bg-green-100 text-green-400'}`}>{request.status}</span></td>
                                                             <td><button className='py-1 px-4 bg-secondary text-white rounded-lg hover:bg-secondaryhover' onClick={handleAllRequestsRowClick}>View</button></td>
                                                         </tr>
                                                     )

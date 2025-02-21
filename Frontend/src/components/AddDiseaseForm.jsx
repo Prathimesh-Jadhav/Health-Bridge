@@ -108,12 +108,12 @@ const AddDiseaseForm = ({ openDiseaseForm, setOpenDiseaseForm }) => {
                     </div>
                     {/* Action buttons: Cancel and Add */}
                     <div className='flex justify-end items-center gap-4'>
-                        <button 
+                        <span 
                             className='px-4 rounded-lg bg-gray-200 hover:bg-gray-300 py-2' 
                             onClick={() => setOpenDiseaseForm(false)} // Close the form without submitting
                         >
                             Cancel
-                        </button>
+                        </span>
                         <button 
                             className='px-4 rounded-lg bg-secondary text-white hover:bg-secondaryhover py-2' 
                             onClick={handleSubmit} // Submit the form data
