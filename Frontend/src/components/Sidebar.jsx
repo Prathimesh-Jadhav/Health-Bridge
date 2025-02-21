@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { sidebarOptions } from '../data'; // Import sidebar options based on user roles
 import avatar from '../assets/avatar.svg'; // Import avatar image
 import logout from '../assets/logout.svg'; // Import logout icon
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link, useNavigate } from 'react-router-dom'; // Import Link for navigation
 import { AppContext } from '../context/GlobalContext'; // Import global context for shared state
 
 const Sidebar = () => {
@@ -11,6 +11,8 @@ const Sidebar = () => {
 
   // State to store sidebar options based on the user role
   const [options, setOptions] = React.useState([]);
+
+  const Navigate = useNavigate(); // Navigate to a new page
 
   // useEffect to set the user role from session storage when the component mounts
   useEffect(() => {
@@ -26,7 +28,8 @@ const Sidebar = () => {
 
   // Function to handle user logout
   const logoutUser = () => {
-    sessionStorage.clear(); // Clear session storage
+    sessionStorage.clear();
+    Navigate('/') // Clear session storage
     window.location.reload(); // Reload the page to reset the application state
   };
 
