@@ -24,42 +24,44 @@ const Login = () => {
 
   // Function to handle form submission
   const submitLogin = async () => {
-    console.log('Login Data:', loginData); // Log the form data for debugging
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    console.log("Backend URL:", backendUrl);
+    console.log('Login Data:', loginData); 
+    const backendUrl = import.meta.env.VITE_BACKEND_URL?.trim(); 
+    if (!backendUrl) {
+      console.error("Backend URL is not defined. Check .env file.");
+      toast.error("Server URL is missing. Contact support.");
+      return;
+    }
+    
     const apiurl = `${backendUrl}/api/users/login`;
+    console.log("API URL:", apiurl);
+  
     try {
-      // Send a POST request to the login endpoint with the form data
-      const response = await axios.post(apiurl, loginData, {
-        headers: {
-          'Content-Type': 'application/json', // Set content type to JSON
-          authorization: `Bearer ${sessionStorage.getItem('token')}` // Include authorization token if available
-        }
-      });
-
-      console.log('response.data.success:', response.data.success); // Log the success status for debugging
+      const token = sessionStorage.getItem('token');
+      const headers = {
+        'Content-Type': 'application/json',
+        ...(token ? { authorization: `Bearer ${token}` } : {}),
+      };
+  
+      const response = await axios.post(apiurl, loginData, { headers });
+  
       if (response.data.success) {
-        toast.success(response.data.message); // Show success toast notification
-        // Store user data in session storage
-        sessionStorage.setItem('token', response.data.token); // Store the authentication token
-        sessionStorage.setItem('role', response.data.data.role); // Store the user role
-        sessionStorage.setItem('doctorID', response.data.data.doctorID); // Store the doctor ID (if applicable)
-        sessionStorage.setItem('email', response.data.data.email); // Store the user email
-        sessionStorage.setItem('name', response.data.data.name); // Store the user name
-        Navigate('/layout/dashboard'); // Navigate to the dashboard on successful login
+        toast.success(response.data.message);
+        sessionStorage.setItem('token', response.data.token);
+        sessionStorage.setItem('role', response.data.data.role);
+        sessionStorage.setItem('doctorID', response.data.data.doctorID);
+        sessionStorage.setItem('email', response.data.data.email);
+        sessionStorage.setItem('name', response.data.data.name);
+        Navigate('/layout/dashboard');
       } else {
-        toast.error(response.data.message); // Show error toast notification
-        Navigate('/'); // Navigate back to the home page on failure
+        toast.error(response.data.message);
+        Navigate('/');
       }
     } catch (err) {
-      console.log(err); // Log the error for debugging
-      if (err.response && err.response.data && err.response.data.message) {
-        toast.error(err.response.data.message); // Show error message from the server
-      } else {
-        toast.error("Something went wrong. Please try again."); // Show generic error message
-      }
+      console.error("Login error:", err);
+      toast.error(err.response?.data?.message || "Something went wrong. Please try again.");
     }
   };
+  
 
   return (
     <div className='fixed top-0 left-0 right-0 bottom-0 z-50 backdrop-blur-sm flex justify-center items-center bg-transparent'>
