@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGODB_URI)
   });
 
 // Middleware to enable CORS
-app.use(cors());
+app.use(cors({origin:'*',withCredentials:true})); // Allow requests from any origin
 
 // Middleware to parse JSON requests
 app.use(express.json());
