@@ -28,7 +28,7 @@ const LandingPage = () => {
         </div>
 
         {/* Right Section - Lottie Animation */}
-        <div className='w-[50%] flex justify-center max-md:w-full'>
+        <div className='w-[50%] flex justify-center max-md:w-full max-md:mt-[50px]'>  
           <Lottie
             options={{
               animationData: animation,
