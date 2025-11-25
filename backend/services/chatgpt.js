@@ -23,7 +23,7 @@ const callGemini = async (req, res) => {
     // Initialize Gemini AI with API key
     const genAI = new GoogleGenerativeAI("AIzaSyA47qoN76jLKTeCxjo53EXpfMmwobyb4W4");
     // Select the Gemini 1.5 Flash model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     try {
         // Generate content using the model
