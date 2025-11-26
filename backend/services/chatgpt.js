@@ -1,5 +1,6 @@
 // Import Google's Generative AI library
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+require('dotenv').config();
 
 /**
  * Handler function for Gemini API calls
@@ -21,7 +22,7 @@ const callGemini = async (req, res) => {
     }
 
     // Initialize Gemini AI with API key
-    const genAI = new GoogleGenerativeAI("AIzaSyA47qoN76jLKTeCxjo53EXpfMmwobyb4W4");
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     // Select the Gemini 1.5 Flash model
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
